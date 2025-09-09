@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Upload, FileText, CheckCircle, Loader2 } from "lucide-react";
+import { Upload, FileText, CheckCircle, Loader2, ArrowLeft } from "lucide-react";
 import selectraLogo from "@/assets/selectra-logo.png";
 
 const CVUpload = () => {
@@ -115,6 +115,15 @@ const CVUpload = () => {
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-3">
+            <Button 
+              variant="ghost" 
+              onClick={() => window.location.href = "/"}
+              className="text-muted-foreground hover:text-selectra-blue"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Home
+            </Button>
+            <div className="h-6 w-px bg-border mx-2" />
             <img src={selectraLogo} alt="SELECTRA" className="h-10 w-10" />
             <h1 className="text-2xl font-bold bg-gradient-to-r from-selectra-blue to-selectra-yellow bg-clip-text text-transparent">
               SELECTRA
