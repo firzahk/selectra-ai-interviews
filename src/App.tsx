@@ -7,6 +7,8 @@ import CandidateLanding from "./pages/CandidateLanding";
 import CVUpload from "./pages/CVUpload";
 import AIInterview from "./pages/AIInterview";
 import InterviewComplete from "./pages/InterviewComplete";
+import OrganizationLanding from "./pages/OrganizationLanding";
+import OrganizationDashboard from "./pages/OrganizationDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +24,8 @@ const App = () => (
           <Route path="/cv-upload" element={<CVUpload />} />
           <Route path="/interview" element={<AIInterview />} />
           <Route path="/interview-complete" element={<InterviewComplete />} />
+          <Route path="/organization-landing" element={<OrganizationLanding />} />
+          <Route path="/organization-dashboard" element={<OrganizationDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

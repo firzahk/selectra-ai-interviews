@@ -99,7 +99,7 @@ const CandidateLanding = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <Button 
-                    onClick={() => setUserType("organization")}
+                    onClick={() => window.location.href = "/organization-landing"}
                     variant="selectra" 
                     className="w-full h-16" 
                     size="lg"
