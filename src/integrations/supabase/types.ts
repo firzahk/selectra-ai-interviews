@@ -14,7 +14,231 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      applications: {
+        Row: {
+          candidate_email: string
+          candidate_id: string | null
+          candidate_name: string
+          created_at: string
+          cv_url: string | null
+          id: string
+          job_post_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          candidate_email: string
+          candidate_id?: string | null
+          candidate_name: string
+          created_at?: string
+          cv_url?: string | null
+          id?: string
+          job_post_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          candidate_email?: string
+          candidate_id?: string | null
+          candidate_name?: string
+          created_at?: string
+          cv_url?: string | null
+          id?: string
+          job_post_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "applications_candidate_id_fkey"
+            columns: ["candidate_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "applications_job_post_id_fkey"
+            columns: ["job_post_id"]
+            isOneToOne: false
+            referencedRelation: "job_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      interviews: {
+        Row: {
+          application_id: string
+          created_at: string
+          id: string
+          interview_type: string | null
+          notes: string | null
+          scheduled_date: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          application_id: string
+          created_at?: string
+          id?: string
+          interview_type?: string | null
+          notes?: string | null
+          scheduled_date?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          application_id?: string
+          created_at?: string
+          id?: string
+          interview_type?: string | null
+          notes?: string | null
+          scheduled_date?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "interviews_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      job_posts: {
+        Row: {
+          application_link: string
+          benefits: string | null
+          created_at: string
+          employment_type: string | null
+          experience_required: string | null
+          id: string
+          job_description: string
+          job_title: string
+          location: string | null
+          organization_id: string
+          qualification: string | null
+          required_skills: string[]
+          responsibilities: string | null
+          salary_range: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          application_link: string
+          benefits?: string | null
+          created_at?: string
+          employment_type?: string | null
+          experience_required?: string | null
+          id?: string
+          job_description: string
+          job_title: string
+          location?: string | null
+          organization_id: string
+          qualification?: string | null
+          required_skills?: string[]
+          responsibilities?: string | null
+          salary_range?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          application_link?: string
+          benefits?: string | null
+          created_at?: string
+          employment_type?: string | null
+          experience_required?: string | null
+          id?: string
+          job_description?: string
+          job_title?: string
+          location?: string | null
+          organization_id?: string
+          qualification?: string | null
+          required_skills?: string[]
+          responsibilities?: string | null
+          salary_range?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_posts_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organization_details: {
+        Row: {
+          address: string
+          contact_number: string
+          contact_person: string
+          created_at: string
+          id: string
+          legal_document_url: string | null
+          organization_name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          address: string
+          contact_number: string
+          contact_person: string
+          created_at?: string
+          id?: string
+          legal_document_url?: string | null
+          organization_name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          address?: string
+          contact_number?: string
+          contact_person?: string
+          created_at?: string
+          id?: string
+          legal_document_url?: string | null
+          organization_name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organization_details_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          updated_at: string
+          user_type: Database["public"]["Enums"]["user_type"]
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id: string
+          updated_at?: string
+          user_type: Database["public"]["Enums"]["user_type"]
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          updated_at?: string
+          user_type?: Database["public"]["Enums"]["user_type"]
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +247,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      user_type: "candidate" | "organization"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +374,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      user_type: ["candidate", "organization"],
+    },
   },
 } as const

@@ -9,6 +9,8 @@ import AIInterview from "./pages/AIInterview";
 import InterviewComplete from "./pages/InterviewComplete";
 import OrganizationLanding from "./pages/OrganizationLanding";
 import OrganizationDashboard from "./pages/OrganizationDashboard";
+import OrganizationSignup from "./pages/OrganizationSignup";
+import OrganizationLogin from "./pages/OrganizationLogin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +26,8 @@ const App = () => (
           <Route path="/cv-upload" element={<CVUpload />} />
           <Route path="/interview" element={<AIInterview />} />
           <Route path="/interview-complete" element={<InterviewComplete />} />
+          <Route path="/organization-signup" element={<OrganizationSignup />} />
+          <Route path="/organization-login" element={<OrganizationLogin />} />
           <Route path="/organization-landing" element={<OrganizationLanding />} />
           <Route path="/organization-dashboard" element={<OrganizationDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
