@@ -23,7 +23,6 @@ interface OrganizationFormData {
   experience: string;
   qualification: string;
   responsibilities: string;
-  benefits: string;
   employmentType: string;
   location: string;
 }
@@ -49,7 +48,6 @@ const OrganizationLanding = () => {
       experience: "",
       qualification: "",
       responsibilities: "",
-      benefits: "",
       employmentType: "",
       location: ""
     }
@@ -162,7 +160,6 @@ const OrganizationLanding = () => {
           experience_required: data.experience,
           qualification: data.qualification,
           responsibilities: data.responsibilities,
-          benefits: data.benefits,
           employment_type: data.employmentType,
           location: data.location,
           pre_assessment_questions: validQuestions,
@@ -420,20 +417,6 @@ const OrganizationLanding = () => {
                         )}
                       />
 
-                      <FormField
-                        control={form.control}
-                        name="benefits"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Benefits & Perks</FormLabel>
-                            <FormControl>
-                              <Textarea placeholder="e.g., Health insurance, remote work, etc." {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
                       <div className="grid grid-cols-2 gap-4">
                         <FormField
                           control={form.control}
@@ -502,7 +485,7 @@ const OrganizationLanding = () => {
                   </div>
                   <CardTitle className="text-2xl">Pre-Assessment Questions</CardTitle>
                   <CardDescription>
-                    Add up to 5 questions for candidates (Optional)
+                    Add up to 5 questions for candidates
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
