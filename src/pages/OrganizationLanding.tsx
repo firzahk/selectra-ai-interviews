@@ -26,7 +26,6 @@ interface OrganizationFormData {
   benefits: string;
   employmentType: string;
   location: string;
-  salaryRange: string;
 }
 
 const OrganizationLanding = () => {
@@ -34,6 +33,7 @@ const OrganizationLanding = () => {
   const [generatedLink, setGeneratedLink] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+  const [preAssessmentQuestions, setPreAssessmentQuestions] = useState<string[]>([""]);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -51,8 +51,7 @@ const OrganizationLanding = () => {
       responsibilities: "",
       benefits: "",
       employmentType: "",
-      location: "",
-      salaryRange: ""
+      location: ""
     }
   });
 
@@ -124,12 +123,34 @@ const OrganizationLanding = () => {
     }
   };
 
-  const onSubmitJobDescription = async (data: OrganizationFormData) => {
+  const handleNextToQuestions = () => {
+    setStep(3);
+  };
+
+  const addQuestion = () => {
+    if (preAssessmentQuestions.length < 5) {
+      setPreAssessmentQuestions([...preAssessmentQuestions, ""]);
+    }
+  };
+
+  const removeQuestion = (index: number) => {
+    setPreAssessmentQuestions(preAssessmentQuestions.filter((_, i) => i !== index));
+  };
+
+  const updateQuestion = (index: number, value: string) => {
+    const updated = [...preAssessmentQuestions];
+    updated[index] = value;
+    setPreAssessmentQuestions(updated);
+  };
+
+  const onSubmitPreAssessment = async () => {
     if (!userId) return;
 
     setIsLoading(true);
     try {
+      const data = form.getValues();
       const skillsArray = data.skills.split(',').map(s => s.trim()).filter(Boolean);
+      const validQuestions = preAssessmentQuestions.filter(q => q.trim() !== "");
       
       const { data: jobPost, error } = await supabase
         .from('job_posts')
@@ -144,7 +165,7 @@ const OrganizationLanding = () => {
           benefits: data.benefits,
           employment_type: data.employmentType,
           location: data.location,
-          salary_range: data.salaryRange,
+          pre_assessment_questions: validQuestions,
           application_link: `${window.location.origin}/cv-upload?job=pending`,
           status: 'active'
         })
@@ -162,7 +183,7 @@ const OrganizationLanding = () => {
         .update({ application_link: link })
         .eq('id', jobPost.id);
 
-      setStep(3);
+      setStep(4);
       toast({
         title: "Job posted successfully!",
         description: "Your recruitment link is ready to share"
@@ -307,7 +328,7 @@ const OrganizationLanding = () => {
                 </CardHeader>
                 <CardContent>
                   <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmitJobDescription)} className="space-y-4">
+                    <form className="space-y-4">
                       <FormField
                         control={form.control}
                         name="jobTitle"
@@ -443,27 +464,27 @@ const OrganizationLanding = () => {
                         />
                       </div>
 
-                      <FormField
-                        control={form.control}
-                        name="salaryRange"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Salary Range</FormLabel>
-                            <FormControl>
-                              <Input placeholder="e.g., $80,000 - $120,000" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
                       <div className="flex gap-4">
                         <Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1">
                           Back
                         </Button>
-                        <Button type="submit" className="flex-1" disabled={isLoading}>
-                          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                          Post Job & Generate Link
+                        <Button 
+                          type="button" 
+                          className="flex-1"
+                          onClick={() => {
+                            const data = form.getValues();
+                            if (!data.jobTitle || !data.jobDescription || !data.skills) {
+                              toast({
+                                title: "Required fields missing",
+                                description: "Please fill in all required fields",
+                                variant: "destructive"
+                              });
+                              return;
+                            }
+                            handleNextToQuestions();
+                          }}
+                        >
+                          Continue to Pre-Assessment Questions (Optional)
                         </Button>
                       </div>
                     </form>
@@ -472,8 +493,72 @@ const OrganizationLanding = () => {
               </Card>
             )}
 
-            {/* Step 3: Link Generated */}
+            {/* Step 3: Pre-Assessment Questions */}
             {step === 3 && (
+              <Card className="bg-white/95 backdrop-blur-sm">
+                <CardHeader className="text-center">
+                  <div className="flex items-center justify-center mb-4">
+                    <FileText className="h-12 w-12 text-primary" />
+                  </div>
+                  <CardTitle className="text-2xl">Pre-Assessment Questions</CardTitle>
+                  <CardDescription>
+                    Add up to 5 questions for candidates (Optional)
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {preAssessmentQuestions.map((question, index) => (
+                    <div key={index} className="flex gap-2">
+                      <div className="flex-1">
+                        <Input
+                          placeholder={`Question ${index + 1}`}
+                          value={question}
+                          onChange={(e) => updateQuestion(index, e.target.value)}
+                        />
+                      </div>
+                      {preAssessmentQuestions.length > 1 && (
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="icon"
+                          onClick={() => removeQuestion(index)}
+                        >
+                          ✕
+                        </Button>
+                      )}
+                    </div>
+                  ))}
+
+                  {preAssessmentQuestions.length < 5 && (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={addQuestion}
+                      className="w-full"
+                    >
+                      + Add Question
+                    </Button>
+                  )}
+
+                  <div className="flex gap-4 pt-4">
+                    <Button type="button" variant="outline" onClick={() => setStep(2)} className="flex-1">
+                      Back
+                    </Button>
+                    <Button 
+                      type="button" 
+                      onClick={onSubmitPreAssessment} 
+                      className="flex-1"
+                      disabled={isLoading}
+                    >
+                      {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                      Post Job & Generate Link
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Step 4: Link Generated */}
+            {step === 4 && (
               <Card className="bg-white/95 backdrop-blur-sm">
                 <CardHeader className="text-center">
                   <div className="flex items-center justify-center mb-4">

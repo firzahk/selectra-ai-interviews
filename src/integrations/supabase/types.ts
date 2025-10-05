@@ -118,6 +118,7 @@ export type Database = {
           job_title: string
           location: string | null
           organization_id: string
+          pre_assessment_questions: string[] | null
           qualification: string | null
           required_skills: string[]
           responsibilities: string | null
@@ -136,6 +137,7 @@ export type Database = {
           job_title: string
           location?: string | null
           organization_id: string
+          pre_assessment_questions?: string[] | null
           qualification?: string | null
           required_skills?: string[]
           responsibilities?: string | null
@@ -154,6 +156,7 @@ export type Database = {
           job_title?: string
           location?: string | null
           organization_id?: string
+          pre_assessment_questions?: string[] | null
           qualification?: string | null
           required_skills?: string[]
           responsibilities?: string | null
