@@ -81,8 +81,8 @@ const CVUpload = () => {
   const handleSubmit = () => {
     setIsSubmitted(true);
     toast({
-      title: "CV Submitted Successfully!",
-      description: "CV HAS BEEN SUBMITTED, STATUS WILL BE UPDATED SOON",
+      title: "Application Submitted Successfully!",
+      description: "You will receive an interview invitation via email",
       duration: 5000,
     });
   };
@@ -93,12 +93,15 @@ const CVUpload = () => {
         <Card className="max-w-md mx-auto shadow-[var(--shadow-selectra)] bg-white/90 backdrop-blur-sm">
           <CardContent className="pt-6 text-center">
             <CheckCircle className="h-16 w-16 text-selectra-blue mx-auto mb-4" />
-            <h2 className="text-2xl font-bold mb-4">CV Submitted Successfully!</h2>
-            <p className="text-muted-foreground mb-6">
-              <strong>CV HAS BEEN SUBMITTED, STATUS WILL BE UPDATED SOON</strong>
+            <h2 className="text-2xl font-bold mb-4">Application Submitted!</h2>
+            <p className="text-lg font-semibold text-selectra-blue mb-4">
+              Interview Invitation Coming Soon
+            </p>
+            <p className="text-muted-foreground mb-2">
+              You will receive an interview invitation link via email to your registered Gmail address.
             </p>
             <p className="text-sm text-muted-foreground mb-6">
-              If your CV passes the initial screening criteria, you will receive an interview invitation email within 24-48 hours.
+              Once you receive the link, you can login and complete your interview within 5 days. Make sure to check your inbox regularly!
             </p>
             <Button variant="selectra" onClick={() => window.location.href = "/"}>
               Return to Home

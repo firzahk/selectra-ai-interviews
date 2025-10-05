@@ -60,14 +60,22 @@ const Index = () => {
                 Apply for jobs and complete AI-powered interview assessments
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-3">
               <Button 
-                variant="secondary" 
                 className="w-full" 
                 size="lg"
-                onClick={() => navigate("/cv-upload")}
+                variant="secondary"
+                onClick={() => navigate("/candidate-signup")}
               >
-                Start Application
+                Sign Up
+              </Button>
+              <Button 
+                variant="outline" 
+                className="w-full" 
+                size="lg"
+                onClick={() => navigate("/candidate-login")}
+              >
+                Sign In
               </Button>
             </CardContent>
           </Card>

@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Mic, MicOff, Camera, CameraOff, Volume2 } from "lucide-react";
 import aiAvatar from "@/assets/ai-avatar.png";
 import selectraLogo from "@/assets/selectra-logo.png";
+import selectraBg from "@/assets/selectra-bg.jpg";
 
 const AIInterview = () => {
   const [timeLeft, setTimeLeft] = useState(40 * 60); // 40 minutes in seconds
@@ -84,7 +85,18 @@ const AIInterview = () => {
 
   if (!interviewStarted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-selectra-blue-light/20 via-background to-selectra-yellow-light/20 flex items-center justify-center">
+      <div 
+        className="min-h-screen relative flex items-center justify-center"
+        style={{
+          backgroundImage: `linear-gradient(rgba(213, 238, 255, 0.8), rgba(255, 248, 220, 0.8)), url(${selectraBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      >
+        <div className="absolute top-8 left-1/2 -translate-x-1/2">
+          <img src={selectraLogo} alt="SELECTRA" className="h-16 w-16" />
+        </div>
         <Card className="max-w-md mx-auto shadow-[var(--shadow-selectra)] bg-white/90 backdrop-blur-sm">
           <CardContent className="pt-6 text-center">
             <img src={aiAvatar} alt="AI Interviewer" className="w-32 h-18 mx-auto mb-6 rounded-lg" />
@@ -116,7 +128,15 @@ const AIInterview = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-selectra-blue-light/20 via-background to-selectra-yellow-light/20">
+    <div 
+      className="min-h-screen relative"
+      style={{
+        backgroundImage: `linear-gradient(rgba(213, 238, 255, 0.8), rgba(255, 248, 220, 0.8)), url(${selectraBg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
       {/* Header */}
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">

@@ -3,7 +3,9 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CandidateLanding from "./pages/CandidateLanding";
+import Index from "./pages/Index";
+import CandidateSignup from "./pages/CandidateSignup";
+import CandidateLogin from "./pages/CandidateLogin";
 import CVUpload from "./pages/CVUpload";
 import AIInterview from "./pages/AIInterview";
 import InterviewComplete from "./pages/InterviewComplete";
@@ -22,7 +24,9 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<CandidateLanding />} />
+          <Route path="/" element={<Index />} />
+          <Route path="/candidate-signup" element={<CandidateSignup />} />
+          <Route path="/candidate-login" element={<CandidateLogin />} />
           <Route path="/cv-upload" element={<CVUpload />} />
           <Route path="/interview" element={<AIInterview />} />
           <Route path="/interview-complete" element={<InterviewComplete />} />
