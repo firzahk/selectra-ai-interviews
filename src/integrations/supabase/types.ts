@@ -177,6 +177,7 @@ export type Database = {
       organization_details: {
         Row: {
           address: string
+          company_description: string | null
           contact_number: string
           contact_person: string
           created_at: string
@@ -185,9 +186,11 @@ export type Database = {
           organization_name: string
           updated_at: string
           user_id: string
+          website_link: string | null
         }
         Insert: {
           address: string
+          company_description?: string | null
           contact_number: string
           contact_person: string
           created_at?: string
@@ -196,9 +199,11 @@ export type Database = {
           organization_name: string
           updated_at?: string
           user_id: string
+          website_link?: string | null
         }
         Update: {
           address?: string
+          company_description?: string | null
           contact_number?: string
           contact_person?: string
           created_at?: string
@@ -207,6 +212,7 @@ export type Database = {
           organization_name?: string
           updated_at?: string
           user_id?: string
+          website_link?: string | null
         }
         Relationships: [
           {

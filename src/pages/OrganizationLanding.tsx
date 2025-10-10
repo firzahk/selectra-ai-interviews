@@ -14,6 +14,9 @@ import selectraBg from "@/assets/selectra-bg.jpg";
 
 interface OrganizationFormData {
   organizationName: string;
+  legalDocument: string;
+  websiteLink: string;
+  companyDescription: string;
   address: string;
   contactNumber: string;
   contactPerson: string;
@@ -39,6 +42,9 @@ const OrganizationLanding = () => {
   const form = useForm<OrganizationFormData>({
     defaultValues: {
       organizationName: "",
+      legalDocument: "",
+      websiteLink: "",
+      companyDescription: "",
       address: "",
       contactNumber: "",
       contactPerson: "",
@@ -81,6 +87,9 @@ const OrganizationLanding = () => {
     if (orgDetails) {
       // Already registered, skip to step 2
       form.setValue('organizationName', orgDetails.organization_name);
+      form.setValue('legalDocument', orgDetails.legal_document_url || "");
+      form.setValue('websiteLink', orgDetails.website_link || "");
+      form.setValue('companyDescription', orgDetails.company_description || "");
       form.setValue('address', orgDetails.address);
       form.setValue('contactNumber', orgDetails.contact_number);
       form.setValue('contactPerson', orgDetails.contact_person);
@@ -98,6 +107,9 @@ const OrganizationLanding = () => {
         .upsert({
           user_id: userId,
           organization_name: data.organizationName,
+          legal_document_url: data.legalDocument,
+          website_link: data.websiteLink,
+          company_description: data.companyDescription,
           address: data.address,
           contact_number: data.contactNumber,
           contact_person: data.contactPerson
@@ -250,6 +262,52 @@ const OrganizationLanding = () => {
                             <FormLabel>Organization Name *</FormLabel>
                             <FormControl>
                               <Input placeholder="Enter your organization name" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="legalDocument"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Legal Document URL</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Link to your company's legal document" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="websiteLink"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Website Link</FormLabel>
+                            <FormControl>
+                              <Input placeholder="https://www.yourcompany.com" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="companyDescription"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Company Description</FormLabel>
+                            <FormControl>
+                              <Textarea 
+                                placeholder="Brief description about your company, what you do, your mission, etc."
+                                className="min-h-[100px]"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
