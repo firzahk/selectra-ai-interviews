@@ -89,7 +89,12 @@ const CVUpload = () => {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-selectra-blue-light/20 via-background to-selectra-yellow-light/20 flex items-center justify-center">
+      <div 
+        className="min-h-screen flex items-center justify-center"
+        style={{
+          backgroundImage: `linear-gradient(135deg, hsl(213 94% 85% / 0.9), hsl(48 96% 89% / 0.9))`,
+        }}
+      >
         <Card className="max-w-md mx-auto shadow-[var(--shadow-selectra)] bg-white/90 backdrop-blur-sm">
           <CardContent className="pt-6 text-center">
             <CheckCircle className="h-16 w-16 text-selectra-blue mx-auto mb-4" />
@@ -113,7 +118,12 @@ const CVUpload = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-selectra-blue-light/20 via-background to-selectra-yellow-light/20">
+    <div 
+      className="min-h-screen"
+      style={{
+        backgroundImage: `linear-gradient(135deg, hsl(213 94% 85% / 0.9), hsl(48 96% 89% / 0.9))`,
+      }}
+    >
       {/* Header */}
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">

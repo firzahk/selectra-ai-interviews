@@ -88,7 +88,7 @@ const AIInterview = () => {
       <div 
         className="min-h-screen relative flex items-center justify-center"
         style={{
-          backgroundImage: `linear-gradient(rgba(213, 238, 255, 0.8), rgba(255, 248, 220, 0.8)), url(${selectraBg})`,
+          backgroundImage: `linear-gradient(135deg, hsl(213 94% 85% / 0.9), hsl(48 96% 89% / 0.9)), url(${selectraBg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed'
@@ -128,15 +128,15 @@ const AIInterview = () => {
   }
 
   return (
-    <div 
-      className="min-h-screen relative"
-      style={{
-        backgroundImage: `linear-gradient(rgba(213, 238, 255, 0.8), rgba(255, 248, 220, 0.8)), url(${selectraBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}
-    >
+      <div 
+        className="min-h-screen relative"
+        style={{
+          backgroundImage: `linear-gradient(135deg, hsl(213 94% 85% / 0.9), hsl(48 96% 89% / 0.9)), url(${selectraBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      >
       {/* Header */}
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">

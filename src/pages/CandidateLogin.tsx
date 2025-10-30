@@ -7,7 +7,6 @@ import { useToast } from "@/hooks/use-toast";
 import selectraLogo from "@/assets/selectra-logo.png";
 import selectraBg from "@/assets/selectra-bg.jpg";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
 
 const CandidateLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,39 +17,21 @@ const CandidateLogin = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    setIsLoading(false);
-
-    if (error) {
+    setTimeout(() => {
       toast({
-        title: "Error",
-        description: error.message,
-        variant: "destructive",
+        title: "Success!",
+        description: "Welcome back to SELECTRA!",
       });
-      return;
-    }
-
-    toast({
-      title: "Success!",
-      description: "Welcome back to SELECTRA!",
-    });
-
-    navigate("/cv-upload");
+      setIsLoading(false);
+      navigate("/cv-upload");
+    }, 800);
   };
 
   return (
     <div 
       className="min-h-screen relative"
       style={{
-        backgroundImage: `linear-gradient(rgba(213, 238, 255, 0.8), rgba(255, 248, 220, 0.8)), url(${selectraBg})`,
+        backgroundImage: `linear-gradient(135deg, hsl(213 94% 85% / 0.9), hsl(48 96% 89% / 0.9)), url(${selectraBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
@@ -107,8 +88,7 @@ const CandidateLogin = () => {
               </div>
               <Button 
                 type="submit" 
-                variant="selectra" 
-                className="w-full" 
+                className="w-full bg-gradient-to-r from-selectra-blue to-selectra-blue-dark hover:from-selectra-blue-dark hover:to-selectra-blue text-white" 
                 size="lg"
                 disabled={isLoading}
               >
